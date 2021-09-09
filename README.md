@@ -1,0 +1,2 @@
+# luzzybot
+Discord LIL LuzzyBot
