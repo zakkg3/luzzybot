@@ -3,17 +3,13 @@ from discord.ext import commands
 import os
 import sys
 
-
-
 description = '''El Lil Bot'''
 TOKEN = os.environ.get('TOKEN')
-
     
 if TOKEN == None:
-    # print ('Error, no token')
     sys.exit('Error, no token')
 else:
-    print (f'El token es {TOKEN}')
+    print (f'TOKEN is in the house')
 
 intents = discord.Intents.default()
 intents.members = True
@@ -123,12 +119,30 @@ async def _bot(ctx):
 @bot.command()
 async def ping(ctx):
     print('ping!')
-    await ctx.send('pong')
-    
+    await ctx.send('pong - ŁIL Luzzybot version 0.1 beta')
+
+
 @bot.command(pass_context=True)
 async def cambiale(ctx, member: discord.Member, nuevo):
     # print (f'queriendo cambiar a {nuevo}')
-    await member.edit(nick=nuevo)
-    await ctx.send(f'Le cambie el nombre a {member.mention} ')
+    # await member.edit(nick=nuevo)
+    await ctx.send(f'Este comando esta deshabilitado {member.mention}, se cambia automatico cuando entran!')
+    
 
+@bot.event
+async def on_member_join(member):
+    actual_nick = str(member.display_name)
+    if "ŁIL " in actual_nick:
+        for channel in member.guild.channels:
+            if str(channel) == "tonterias":
+                await channel.send(f"""Bienvenido, tu ya eres un ŁIL que guay! {member.mention}!""")
+    else:
+        nuevo=f'ŁIL {actual_nick}'
+        await member.edit(nick=nuevo)
+        for channel in member.guild.channels:
+            if str(channel) == "tonterias":
+                await channel.send(f"""Bienvenido a ŁIL Army {actual_nick}, te hemos cambiado el nick a {member.mention}""")
+        
+    
+    
 bot.run(TOKEN)
