@@ -1,2 +1,2 @@
 # luzzybot
-Discord LIL LuzzyBot
+Discord ŁIL LuzzyBot
